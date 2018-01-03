@@ -1,0 +1,55 @@
+import { Datatypes as AnimalDatatypes, Animal } from "./animal";
+import { Datatypes as AnimalTransactionDatatypes } from "./animalTransaction";
+import { Datatypes as GroupDatatypes } from "./group";
+import { Datatypes as PaddockDatatypes } from "./paddock";
+
+export type AllDatatypes =
+    AnimalDatatypes |
+    AnimalTransactionDatatypes |
+    GroupDatatypes |
+    PaddockDatatypes |
+    undefined;
+
+export const datatypes = {
+    AnimalDatatypes,
+    AnimalTransactionDatatypes,
+    GroupDatatypes,
+    PaddockDatatypes,
+}
+
+import { AllClasses as AnimalClasses } from "./animal";
+import { AllClasses as AnimalTransactionClasses } from "./animalTransaction";
+import { AllClasses as GroupClasses } from "./group";
+import { AllClasses as PaddockClasses } from "./paddock";
+
+export type AllClasses =
+    AnimalClasses |
+    AnimalTransactionClasses |
+    GroupClasses |
+    PaddockClasses |
+    undefined;
+
+export const displayableDatatypes = [
+    AnimalDatatypes.Animal,
+    GroupDatatypes.Group,
+    PaddockDatatypes.Paddock
+];
+
+export const mapDatatypeToString = (datatype: AllDatatypes): string => {
+    switch (datatype) {
+        case AnimalDatatypes.Animal:
+            return "Animal";
+        case AnimalDatatypes.AnimalCount:
+            return "AnimalCount";
+        case AnimalTransactionDatatypes.AnimalTransaction:
+            return "Animal Transaction";
+        case GroupDatatypes.Group:
+            return "Group";
+        case GroupDatatypes.GroupValues:
+            return "Group Values";
+        case PaddockDatatypes.Paddock:
+            return "Paddock";
+        default:
+            return "undefined";
+    }
+}

@@ -1,0 +1,162 @@
+@import "./dataCards/dataCards.scss";
+
+body {
+    margin: 0px;
+}
+
+.flex-static {
+    flex-shrink: 0;
+    flex-grow: 0;
+}
+
+.flex-expandable {
+    flex-shrink: 1;
+    flex-grow: 1;
+}
+
+.main-container {
+    width: 100vw;
+    height: 100vh;
+
+    display: flex;
+    flex-direction: column;
+}
+
+.main-header {
+    width: 100%;
+    height: 100px;
+
+    @extend .flex-static;
+
+    display: flex;
+    flex-direction: row;
+
+    background: red;
+
+    .header-item {
+        margin: 10px;
+        padding: 5px;
+        background: yellowgreen;
+    }
+}
+
+.user-details-container {
+    background: pink;
+
+}
+
+.center-body {
+    background: blue;
+
+    @extend .flex-expandable;    
+
+    display: flex;
+    flex-direction: row;
+}
+
+.center-content {
+    background: grey;
+
+    @extend .flex-expandable; 
+}
+
+.content-container {
+    height: 100%;
+    overflow-y: auto;
+    display: flex;
+}
+
+.row-list-container {
+    @extend .flex-expandable;
+
+    padding: 6px;
+
+    display: flex;
+    flex-direction: column;
+}
+
+.row-list {
+    @extend .flex-expandable;
+    display: flex;
+    flex-direction: row;
+
+    overflow-x: auto;
+}
+
+.column-list-container {
+    @extend .flex-expandable;
+
+    padding: 6px;
+
+    display: flex;
+    flex-direction: row;
+}
+
+.datatype-list-container {
+    @extend .column-list-container;
+    flex-shrink: 0;
+    flex-grow: 0;
+}
+
+.column-list {
+    @extend .flex-expandable;
+    display: flex;
+    flex-direction: column;
+
+    overflow-y: auto;
+}
+
+.calendar-row {
+    display: auto;
+}
+
+.chart-container {
+    display: flex;
+    flex-direction: row;
+    min-height: 300px;
+}
+
+.chart-container-inner {
+    flex-grow: 1;
+    flex-shrink: 1;
+}
+
+.sidebar {
+    height: 100%;
+    width: 30px;
+    background: purple;
+
+    @extend .flex-static;       
+}
+
+.overlay {
+    position: fixed; /* Sit on top of the page content */
+    display: block; /* Hidden by default */
+    width: 100%; /* Full width (cover the whole page) */
+    height: 100%; /* Full height (cover the whole page) */
+    top: 0; 
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0,0,0,0.5); /* Black background with opacity */
+    z-index: 2; /* Specify a stack order in case you're using a different order for other elements */
+    cursor: pointer; /* Add a pointer on hover */
+}
+
+.dialog-center-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    min-width: 80vw;
+    min-height: 80vh;
+    max-width: 80vw;
+    max-height: 80vh;
+    background: white;
+    transform: translate(-50%,-50%);
+    display: flex;
+    flex-direction: row;
+}
+
+.item-selector {
+    width: 200px;
+}

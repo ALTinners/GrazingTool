@@ -1,0 +1,18 @@
+{
+    "compilerOptions": {
+        "outDir": "./build/",
+        "sourceMap": false,
+        "noImplicitAny": true,
+        "strictNullChecks": true,
+        "module": "es2015",
+        "moduleResolution": "node",
+        "target": "es5",
+        "jsx": "react",
+        "typeRoots": [
+            "./node_modules/@types"
+        ]
+    },
+    "include": [
+        "./src/**/*"
+    ]
+}
