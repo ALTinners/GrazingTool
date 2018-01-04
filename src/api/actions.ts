@@ -2,6 +2,8 @@ import { actions as animalActions } from "./animal";
 import { actions as animalTransactionActions } from "./animalTransaction"
 import { actions as groupActions } from "./group";
 import { Actions as paddockActions } from "./paddock";
+import { actions as feedRecordActions } from "./feedRecord";
+import { actions as movementActions } from "./movement";
 import { actions as uiActions } from "./uiState";
 
 export const actions = {
@@ -9,5 +11,7 @@ export const actions = {
     groupActions,
     animalTransactionActions,
     paddockActions,
+    feedRecordActions,
+    movementActions,
     uiActions
 }

@@ -4,6 +4,8 @@ import { State as AnimalState } from "./animal";
 import { State as TransactionState } from "./animalTransaction";
 import { State as GroupState } from "./group";
 import { State as PaddockState } from "./paddock";
+import { State as FeedRecordState } from "./feedRecord";
+import { State as MovementState } from "./movement";
 import { State as UiState } from "./uiState"
 
 export interface AppState {
@@ -11,5 +13,7 @@ export interface AppState {
     transactions: TransactionState;
     groups: GroupState;
     paddocks: PaddockState;
+    feedRecords: FeedRecordState;
+    movements: MovementState;
     uiState: UiState;
 }
