@@ -3,7 +3,7 @@ import * as Luxon from "luxon";
 import { BaseIdObject, IdType } from "../common";
 
 export enum Datatypes {
-    Movement = "FEED_RECORD"
+    Movement = "MOVEMENT"
 }
 
 export class Movement extends BaseIdObject {

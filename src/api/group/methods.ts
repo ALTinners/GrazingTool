@@ -9,20 +9,21 @@ import {
     GroupDatedValues
 } from "../";
 
-export const calculateValuesForSpan =
+export const calculateValuesForInterval =
     (
         animals: Animal[],
         transactions: AnimalTransaction[],
-        group: Group,
-        startDate: Luxon.DateTime,
-        endDate: Luxon.DateTime
+        interval: Luxon.Interval
     ): GroupDatedValues[] => {
         let values: GroupDatedValues[] = [];
 
         let dailyValue: GroupValues = { count: 0, requirement: 0, value: 0 };
 
-        let date = (transactions.length > 1 ? transactions[0].date : startDate);
-        while (!date.hasSame(endDate, "day")) {
+        let date = interval.start;
+        if (transactions.length > 0 && transactions[0].date < date) {
+            date = transactions[0].date;
+        } 
+        while (!date.hasSame(interval.end, "day")) {
             let filteredTransactions: AnimalTransaction[] = transactions.filter(
                 (transaction: AnimalTransaction) => {
                     return transaction.date.hasSame(date, "day");
@@ -41,7 +42,6 @@ export const calculateValuesForSpan =
             values.push(new GroupDatedValues(date, dailyValue.count, dailyValue.requirement, dailyValue.value, filteredTransactionPairs));
             date = date.plus({ days: 1 });
         }
-        console.log(values);
 
         return values;
     }

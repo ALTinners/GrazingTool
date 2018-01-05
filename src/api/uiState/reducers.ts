@@ -8,14 +8,12 @@ import { Animal } from "../animal/index";
 
 export type State = {
     dataEditorDatatype: AllDatatypes;
-    stockControlStartDate: Luxon.DateTime;
-    stockControlEndDate: Luxon.DateTime;
+    stockControlInterval: Luxon.Interval;
 }
 
 const initialState: State = {
     dataEditorDatatype: undefined,
-    stockControlStartDate: Luxon.DateTime.fromJSDate(new Date()),
-    stockControlEndDate: Luxon.DateTime.fromJSDate(new Date()).plus({ days: 90 })
+    stockControlInterval: Luxon.Interval.fromDateTimes(Luxon.DateTime.fromJSDate(new Date()), Luxon.DateTime.fromJSDate(new Date()).plus({ days: 90 })),
 };
 
 const uiState = (state: State = initialState, action: Actions.AllActions): State => {
@@ -25,15 +23,10 @@ const uiState = (state: State = initialState, action: Actions.AllActions): State
                 ...state,
                 dataEditorDatatype: action.datatype
             }
-        case (getType(Actions.setStockControlStartDate)):
+        case (getType(Actions.setStockControlInterval)):
             return {
                 ...state,
-                stockControlStartDate: action.date
-            }
-        case (getType(Actions.setStockControlEndDate)):
-            return {
-                ...state,
-                stockControlEndDate: action.date
+                stockControlInterval: action.interval
             }
         default:
             return state;

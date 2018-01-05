@@ -1,12 +1,13 @@
 import * as JQuery from "jquery";
 import * as uuid from "uuid";
+import * as Luxon from "luxon";
 
 export type IdType = string;
 
 export class BaseIdObject {
-    id: IdType;
-    type: string;
-    name: string;
+    readonly id: IdType;
+    readonly type: string;
+    readonly name: string;
 
     constructor(type: string, name?: string, id: IdType = uuid.v4() ) {
         this.id = id;
@@ -16,5 +17,14 @@ export class BaseIdObject {
 
     public clone(): this & {} {
         return JQuery.extend(true, {}, this);
+    }
+}
+
+export class BaseDatedObject extends BaseIdObject {
+    readonly date: Luxon.DateTime;
+
+    constructor(type: string, date: Luxon.DateTime, name?: string, id?: IdType ) {
+        super(type, name, id);
+        this.date = date;
     }
 }

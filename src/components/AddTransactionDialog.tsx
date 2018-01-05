@@ -169,10 +169,22 @@ class AddTransactionDialogInternal extends React.Component<Props, AddTransaction
                     />
                 </div>
                 <div className={"dialog-outputs-column"}>
-                    {this.renderAppliedTransaction()}
+                    {this.renderSubmitButton()}
                 </div>
             </div>
         );
+    }
+
+    renderSubmitButton(): JSX.Element | null {
+        if (this.isTransactionDefined()) {
+            return (
+                <button onClick={this.saveAndClose}>
+                    OK
+                </button>
+            );
+        } else {
+            return null;
+        }
     }
 
     renderAppliedTransaction(): JSX.Element | null {
@@ -186,9 +198,6 @@ class AddTransactionDialogInternal extends React.Component<Props, AddTransaction
                     <GroupCalendarRow
                         group={group}
                     />
-                    <button onClick={this.saveAndClose}>
-                        OK
-                </button>
                 </div>
             );
         } else {

@@ -1,6 +1,6 @@
 import * as Luxon from "luxon";
 
-import { BaseIdObject } from "../common";
+import { BaseIdObject, IdType } from "../common";
 import { Animal, AnimalCount, } from "../animal";
 import { AnimalTransaction, AnimalTransactionPair } from "../animalTransaction";
 import { inherits } from "util";
@@ -11,8 +11,8 @@ export enum Datatypes {
 }
 
 export class Group extends BaseIdObject {
-    constructor(name: string) {
-        super(Datatypes.Group, name);
+    constructor(name: string, id?: IdType) {
+        super(Datatypes.Group, name, id);
     }
 }
 

@@ -7,6 +7,7 @@ import { reducer as groups } from "./group";
 import { reducer as paddocks } from "./paddock";
 import { reducer as feedRecords } from "./feedRecord";
 import { reducer as movements } from "./movement";
+import { reducer as allocations } from "./allocation";
 import { reducer as uiState } from "./uiState";
 
 
@@ -18,6 +19,7 @@ export const reducer: Reducer<AppState> = combineReducers<AppState>(
         paddocks,
         feedRecords,
         movements,
+        allocations,
         uiState,
     }
 );

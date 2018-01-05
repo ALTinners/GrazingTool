@@ -1,21 +1,31 @@
 import * as Luxon from "luxon";
 import { createSelector } from 'reselect';
 
-import { Animal, AnimalTransaction, Group, GroupDatedValues, calculateValuesForSpan } from "../"
-import { AppState } from '../state';
+import {
+    AppState,
+    IdType,
+    Animal,
+    AnimalTransaction,
+    Group,
+    GroupDatedValues,
+    calculateValuesForInterval
+} from "../"
+import { getAnimals } from "../animal";
+import { GetTransactionsOptions, getTransactions } from "../animalTransaction";
+import { getStockControlInterval, } from "../uiState";
 
-const getAnimals = (state: AppState) => state.animals;
-const getTransactions = (state: AppState) => state.transactions;
-const getGroup = (state: AppState, group: Group): Group => group;
-const getStockControlStartDate = (state: AppState) => state.uiState.stockControlStartDate;
-const getStockControlEndDate = (state: AppState) => state.uiState.stockControlEndDate;
+export const getGroups = (state: AppState) => state.animals;
+export const getGroupForId = (state: AppState, id: IdType): Group | undefined => state.groups.find((group: Group) => group.id === id);
+
+interface GetGroupValuesForSpanOptions extends GetTransactionsOptions {
+    groupId: IdType;
+}
+
+const getGroupId = (state: AppState, options: GetGroupValuesForSpanOptions): IdType => options.groupId;
 
 export const getGroupValuesForSpan = createSelector(
-    [getAnimals, getTransactions, getGroup, getStockControlStartDate, getStockControlEndDate],
-    (animals: Animal[], transactions: AnimalTransaction[], group: Group, startDate: Luxon.DateTime, endDate: Luxon.DateTime): GroupDatedValues[] => {
-        let groupTransactions = transactions.filter(
-            (transaction) => (transaction.groupId == group.id && transaction.date <= endDate)
-        );
-        return calculateValuesForSpan(animals, groupTransactions, group, startDate, endDate);
+    [getAnimals, getTransactions, getGroupId, getStockControlInterval],
+    (animals: Animal[], transactions: AnimalTransaction[], groupId: IdType, interval: Luxon.Interval): GroupDatedValues[] => {
+        return calculateValuesForInterval(animals, transactions, interval);
     }
 )

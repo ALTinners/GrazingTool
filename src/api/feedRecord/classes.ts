@@ -1,19 +1,17 @@
 import * as Luxon from "luxon";
 
-import { BaseIdObject, IdType } from "../common";
+import { BaseDatedObject, IdType } from "../common";
 
 export enum Datatypes {
     FeedRecord = "FEED_RECORD"
 }
 
-export class FeedRecord extends BaseIdObject {
-    date: Luxon.DateTime;
-    paddocks: IdType[];
+export class FeedRecord extends BaseDatedObject {
+    paddockIds: IdType[];
     notes: string[];
-    constructor(date: Luxon.DateTime,paddocks: IdType[],notes: string[]) {
-        super(Datatypes.FeedRecord);
-        this.date = date;
-        this.paddocks = paddocks;
+    constructor(date: Luxon.DateTime, paddockIds: IdType[], notes: string[]) {
+        super(Datatypes.FeedRecord, date);
+        this.paddockIds = paddockIds;
         this.notes = notes;
     }
 }

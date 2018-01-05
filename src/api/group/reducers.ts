@@ -6,7 +6,11 @@ import * as GroupActions from "./actions";
 
 export type State = Group[];
 
-const initialState: State = [new Group("Sheep1"), new Group("Cows1"), new Group("Bulls1")];
+const initialState: State = [
+    new Group("Sheep1", "SHEEP1"),
+    // new Group("Cows1"),
+    // new Group("Bulls1")
+];
 
 const groups = (state: State = initialState, action: GroupActions.GroupAction): State => {
     switch (action.type) {

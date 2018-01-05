@@ -6,8 +6,7 @@ import { datatypes } from "../index";
 
 enum ActionTypes {
     SetDataEditorDatatype = "SET_DATA_EDITOR_DATATYPE",
-    SetStockControlStartDate = "SET_STOCK_CONTROL_START_DATE",
-    SetStockControlEndDate = "SET_STOCK_CONTROL_END_DATE",
+    SetStockControlInterval = "SET_STOCK_CONTROL_INTERVAL",
 }
 
 export interface SetDataEditorDatatypeAction {
@@ -19,28 +18,18 @@ export const setDataEditorDatatype = createAction(ActionTypes.SetDataEditorDatat
     (datatype: AllDatatypes) => { return { type: ActionTypes.SetDataEditorDatatype, datatype: datatype } }
 );
 
-export interface SetStockControlStartDateAction {
-    readonly type: ActionTypes.SetStockControlStartDate,
-    readonly date: Luxon.DateTime;
+export interface SetStockControlIntervalAction {
+    readonly type: ActionTypes.SetStockControlInterval,
+    readonly interval: Luxon.Interval;
 }
 
-export const setStockControlStartDate = createAction(ActionTypes.SetStockControlStartDate,
-    (date: Luxon.DateTime) => { return { type: ActionTypes.SetStockControlStartDate, date: date } }
+export const setStockControlInterval = createAction(ActionTypes.SetStockControlInterval,
+    (interval: Luxon.Interval) => { return { type: ActionTypes.SetStockControlInterval, interval } }
 );
 
-export interface SetStockControlEndDateAction {
-    readonly type: ActionTypes.SetStockControlEndDate,
-    readonly date: Luxon.DateTime;
-}
-
-export const setStockControlEndDate = createAction(ActionTypes.SetStockControlEndDate,
-    (date: Luxon.DateTime) => { return { type: ActionTypes.SetStockControlEndDate, date: date } }
-);
-
-export type AllActions = SetDataEditorDatatypeAction | SetStockControlStartDateAction | SetStockControlEndDateAction;
+export type AllActions = SetDataEditorDatatypeAction | SetStockControlIntervalAction;
 
 export const actions = {
     setDataEditorDatatype,
-    setStockControlStartDate,
-    setStockControlEndDate
+    setStockControlInterval,
 }
