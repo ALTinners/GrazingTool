@@ -42,6 +42,10 @@ export class GroupDatedValues extends BaseIdObject implements GroupValues {
         this.value = value;
         this.transactions = transactions;
     }
+
+    readonly isValid = (): boolean => {
+        return true;
+    }
 }
 
 export type AllClasses = Group | GroupDatedValues;

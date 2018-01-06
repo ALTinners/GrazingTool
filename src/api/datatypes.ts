@@ -42,7 +42,8 @@ export type AllClasses =
 export const displayableDatatypes = [
     AnimalDatatypes.Animal,
     GroupDatatypes.Group,
-    PaddockDatatypes.Paddock
+    PaddockDatatypes.Paddock,
+    AnimalTransactionDatatypes.AnimalTransaction
 ];
 
 export const mapDatatypeToString = (datatype: AllDatatypes): string => {

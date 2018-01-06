@@ -23,6 +23,27 @@ export class AnimalTransaction extends BaseDatedObject {
         this.grouping = grouping;
         this.tags = tags;
     }
+
+    setAnimalId = (id: IdType): AnimalTransaction => {
+        return this.set("animalId", id);
+    }
+
+    setGroupId = (id: IdType): AnimalTransaction => {
+        return this.set("groupId", id);
+    }
+
+    setCount = (count: number): AnimalTransaction => {
+        console.log(this);
+        return this.set("count", count);
+    }
+
+    setDate = (date: Luxon.DateTime): AnimalTransaction => {
+        return this.set("date", date);
+    }
+
+    isValid = (): boolean => {
+        return (this.date.isValid);
+    }
 }
 
 export interface AnimalTransactionPair {

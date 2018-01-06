@@ -1,4 +1,4 @@
-export { IdType } from "./common";
+export { BaseIdObject, IdType, MyImmut, MyDevImmut } from "./common";
 export { Animal, AnimalCount } from "./animal";
 export { AnimalTransaction, AnimalTransactionPair } from "./animalTransaction";
 export { Group, GroupValues, GroupDatedValues } from "./group";

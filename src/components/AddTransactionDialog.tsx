@@ -51,7 +51,6 @@ class AddTransactionDialogInternal extends React.Component<Props, AddTransaction
 
     constructor(props: Props) {
         super(props);
-
         this.state = {
             selectedGroup: undefined,
             selectedAnimal: undefined,

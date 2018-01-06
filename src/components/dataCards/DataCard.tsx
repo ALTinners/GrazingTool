@@ -9,13 +9,14 @@ interface InternalRootProps {
 
 //An internal class which is used to store and pass props to CommonRootProps for wrapped classes
 interface InternalDataCardState {
-    isSelected: boolean
+    isSelected: boolean;
+    isValid: boolean;
 }
 
 // Props passed to a wrapped component. Need to be &-ed with the actual component's props
-export interface DataCardProps {
-    isSelected: boolean;
+export interface DataCardProps extends InternalDataCardState {
     setSelected: () => void;
+    setValid?: (valid: boolean) => void;
 }
 
 export const makeDataCard = () =>
@@ -24,11 +25,12 @@ export const makeDataCard = () =>
             | React.StatelessComponent<OriginalProps & DataCardProps>)
     ) => {
         type ResultProps = OriginalProps & InternalRootProps;
-        const result = class OverlayComponent extends React.Component<ResultProps, InternalDataCardState> {
+        const result = class DataCardComponent extends React.Component<ResultProps, InternalDataCardState> {
             constructor(props: ResultProps) {
                 super(props);
                 this.state = {
-                    isSelected: false
+                    isSelected: false,
+                    isValid: false,
                 };
             }
 
@@ -38,11 +40,25 @@ export const makeDataCard = () =>
                         <Component
                             isSelected={this.state.isSelected}
                             setSelected={() => { this.setState({ isSelected: !this.state.isSelected }) }}
+                            // setValid={(isValid: boolean) => { console.log(isValid); this.setState({ isValid }) }}
                             {...this.props}
                             {...this.state}
                         />
+                        {this.renderSubmit()}
                     </div>
                 );
+            }
+
+            renderSubmit(): JSX.Element | null {
+                if (this.state.isValid) {
+                    return (
+                        <button>
+                            OK
+                        </button>
+                    );
+                } else {
+                    return null;
+                }
             }
         };
 

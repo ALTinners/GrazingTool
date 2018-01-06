@@ -13,9 +13,15 @@ import {
     displayableDatatypes,
 } from "../api";
 
-import { AnimalCard, GroupCard } from "./dataCards";
+import {
+    AnimalCard,
+    GroupCard,
+    AnimalTransactionCard
+} from "./dataCards";
 import { DataEditorDatatypeCard } from "./DataEditorDatatypeCard";
 import "./App.scss";
+import { AnimalTransactionCardInternal } from "./dataCards/AnimalTransactionCard";
+import { AnimalTransaction } from "../api/animalTransaction/index";
 
 interface DataEditorProps {
 
@@ -25,12 +31,14 @@ interface ReduxStateProps {
     animals: Animal[];
     groups: Group[];
     paddocks: Paddock[];
+    transactions: AnimalTransaction[];
     selectedDatatype: AllDatatypes;
 }
 
 interface ReduxDispatchProps {
     setDatatype: (data: AllDatatypes) => void;
     setAnimal: (data: Animal) => void;
+    setAnimalTransaction: (data: AnimalTransaction) => void;
 }
 
 type Props = DataEditorProps & ReduxStateProps & ReduxDispatchProps;
@@ -80,6 +88,8 @@ class DataEditorInternal extends React.Component<Props, {}> {
                 return this.renderAnimalCards();
             case datatypes.GroupDatatypes.Group:
                 return this.renderGroupCards();
+            case datatypes.AnimalTransactionDatatypes.AnimalTransaction:
+                return this.renderAnimalTransactionCards();
             default:
                 return [];
         }
@@ -109,6 +119,21 @@ class DataEditorInternal extends React.Component<Props, {}> {
                 )
             });
     }
+
+    renderAnimalTransactionCards = (): JSX.Element[] => {
+        return this.props.transactions.map(
+            (transaction) => {
+                return (
+                    <AnimalTransactionCard
+                        key={transaction.id}
+                        animals={this.props.animals}
+                        groups={this.props.groups}
+                        animalTransaction={transaction}
+                        setAnimalTransaction={this.props.setAnimalTransaction}
+                    />
+                )
+            });
+    }
 }
 
 const mapStateToProps = (state: AppState): ReduxStateProps => {
@@ -116,6 +141,7 @@ const mapStateToProps = (state: AppState): ReduxStateProps => {
         animals: state.animals,
         groups: state.groups,
         paddocks: state.paddocks,
+        transactions: state.transactions,
         selectedDatatype: state.uiState.dataEditorDatatype
     };
 }
@@ -127,6 +153,9 @@ const mapDispatchToProps = (dispatch: Redux.Dispatch<AppState>): ReduxDispatchPr
         },
         setAnimal: (animal: Animal) => {
             dispatch(actions.animalActions.modifyAnimal(animal))
+        },
+        setAnimalTransaction: (transaction: AnimalTransaction) => {
+            dispatch(actions.animalTransactionActions.modifyAnimalTransaction(transaction))
         },
     };
 }

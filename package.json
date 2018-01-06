@@ -36,6 +36,7 @@
     "awesome-typescript-loader": "^3.4.1",
     "css-loader": "^0.28.7",
     "file-loader": "^1.1.6",
+    "immutable": "^3.8.2",
     "jquery": "^3.2.1",
     "luxon": "^0.2.10",
     "node-sass": "^4.7.2",

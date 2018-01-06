@@ -21,7 +21,7 @@ export function itemsAsReactSelectData<T extends BaseIdObject>(array: T[]): Opti
                 value: item.id
             }
         );
-    })
+    });
     return options;
 }
 

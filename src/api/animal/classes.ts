@@ -18,7 +18,7 @@ export class Animal extends BaseIdObject {
         this.value = value;
     }
 
-    isValid = (): boolean => {
+    readonly isValid = (): boolean => {
         return (this.name.length > 0 && this.requirement != NaN && this.value != NaN);
     }
 
@@ -47,6 +47,10 @@ export class AnimalCount extends BaseIdObject {
 
     applyTransaction(transaction: AnimalTransaction) {
         this.count += transaction.count;
+    }
+
+    readonly isValid = (): boolean => {
+        return true;
     }
 }
 

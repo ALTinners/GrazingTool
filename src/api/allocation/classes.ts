@@ -18,6 +18,10 @@ export class Allocation extends BaseIdObject {
         this.groups = groups;
         this.paddocks = paddocks;
     }
+
+    readonly isValid = (): boolean => {
+        return (this.startDate.isValid && this.endDate.isValid);
+    }
 }
 
 export type AllClasses = Allocation;

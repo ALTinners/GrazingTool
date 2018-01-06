@@ -14,6 +14,10 @@ export class FeedRecord extends BaseDatedObject {
         this.paddockIds = paddockIds;
         this.notes = notes;
     }
+
+    readonly isValid = (): boolean => {
+        return (this.date.isValid);
+    }
 }
 
 export type AllClasses = FeedRecord;

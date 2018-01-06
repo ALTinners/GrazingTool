@@ -20,6 +20,14 @@ export class Paddock extends BaseIdObject {
         this.name = name;
         this.growthRates = growthRate;
     }
+
+    readonly isValid = (): boolean => {
+        let datesValid: boolean = true;
+        this.growthRates.forEach( (rate) => {
+            datesValid = datesValid && rate.date.isValid;
+        });
+        return datesValid;
+    }
 }
 
 interface PaddockFeedValues {
@@ -37,6 +45,8 @@ export class DatedPaddockFeedValues extends BaseIdObject implements PaddockFeedV
         this.date = date.toLocaleString();
         this.feedValue = feedValue;
     }
+
+    readonly isValid = (): boolean => { return true; }
 }
 
 export type AllClasses = Paddock | DatedPaddockFeedValues;
