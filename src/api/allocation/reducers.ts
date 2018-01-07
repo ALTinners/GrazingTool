@@ -8,7 +8,7 @@ export type State = Allocation[];
 
 const initialState: State = [];
 
-const allocations = (state: State = initialState, action: Actions.AllocationAction): State => {
+export const allocationReducer = (state: State = initialState, action: Actions.AllocationAction): State => {
     switch (action.type) {
         case (getType(Actions.addAllocation)):
             return state.concat([action.allocation]);
@@ -20,5 +20,3 @@ const allocations = (state: State = initialState, action: Actions.AllocationActi
             return state;
     }
 }
-
-export const reducer = allocations;

@@ -23,12 +23,12 @@ export const datatypes = {
     MovementDatatypes,
 }
 
-import { AllClasses as AnimalClasses } from "./animal";
-import { AllClasses as AnimalTransactionClasses } from "./animalTransaction";
-import { AllClasses as GroupClasses } from "./group";
-import { AllClasses as PaddockClasses } from "./paddock";
-import { AllClasses as FeedRecordClasses } from "./feedRecord";
-import { AllClasses as MovementClasses } from "./movement";
+import { AnimalClasses } from "./animal";
+import { AnimalTransactionClasses } from "./animalTransaction";
+import { GroupClasses } from "./group";
+import { PaddockClasses } from "./paddock";
+import { FeedRecordClasses } from "./feedRecord";
+import { MovementClasses } from "./movement";
 
 export type AllClasses =
     AnimalClasses |

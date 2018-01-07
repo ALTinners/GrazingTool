@@ -1,20 +1,20 @@
 import { Reducer, Dispatch, combineReducers } from "redux";
 
 import { AppState } from "./state";
-import { reducer as animals } from "./animal";
-import { reducer as transactions } from "./animalTransaction";
-import { reducer as groups } from "./group";
-import { reducer as paddocks } from "./paddock";
-import { reducer as feedRecords } from "./feedRecord";
-import { reducer as movements } from "./movement";
-import { reducer as allocations } from "./allocation";
-import { reducer as uiState } from "./uiState";
+import { animalReducer as animals } from "./animal";
+import { animalTransactionReducer as animalTransactions } from "./animalTransaction";
+import { groupReducer as groups } from "./group";
+import { paddockReducer as paddocks } from "./paddock";
+import { feedRecordReducer as feedRecords } from "./feedRecord";
+import { movementReducer as movements } from "./movement";
+import { allocationReducer as allocations } from "./allocation";
+import { uiStateReducer as uiState } from "./uiState";
 
 
 export const reducer: Reducer<AppState> = combineReducers<AppState>(
     {
         animals,
-        transactions,
+        animalTransactions,
         groups,
         paddocks,
         feedRecords,

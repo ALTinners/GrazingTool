@@ -46,7 +46,7 @@ export const deleteGroup = createAction(ActionTypes.DeleteGroup,
     }
 );
 
-export const actions = {
+export const groupActions = {
     addGroup,
     modifyGroup,
     deleteGroup,

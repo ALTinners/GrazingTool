@@ -24,7 +24,7 @@ const initialState: State = {
     },
 };
 
-const uiState = (state: State = initialState, action: Actions.AllActions): State => {
+export const uiStateReducer = (state: State = initialState, action: Actions.AllActions): State => {
     switch (action.type) {
         case (getType(Actions.setDataEditorDatatype)):
             return {
@@ -45,5 +45,3 @@ const uiState = (state: State = initialState, action: Actions.AllActions): State
             return state;
     }
 }
-
-export const reducer = uiState;

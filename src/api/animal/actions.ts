@@ -24,7 +24,7 @@ export const deleteAnimal = createAction(ActionTypes.DeleteAnimal,
     (animal: Animal) => { return { type: ActionTypes.DeleteAnimal, animal: animal } }
 );
 
-export const actions = {
+export const animalActions = {
     addAnimal,
     modifyAnimal,
     deleteAnimal,

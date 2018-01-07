@@ -12,7 +12,7 @@ const initialState: State = [
     new AnimalTransaction({animalId: "SHEEP", groupId: "SHEEP1", headCount: -5, date: Luxon.DateTime.fromISO("2018-01-03")}),
 ];
 
-const transactions = (state: State = initialState, action: AnimalTransactionActions.AnimalTransactionAction): State => {
+export const animalTransactionReducer = (state: State = initialState, action: AnimalTransactionActions.AnimalTransactionAction): State => {
     switch (action.type) {
         case (getType(AnimalTransactionActions.addAnimalTransaction)):
             return state.concat([action.transaction]);
@@ -24,5 +24,3 @@ const transactions = (state: State = initialState, action: AnimalTransactionActi
             return state;
     }
 }
-
-export const reducer = transactions;

@@ -40,7 +40,7 @@ export const setPaddockFilterState = createAction(ActionTypes.SetPaddockFilterSt
 
 export type AllActions = SetDataEditorDatatypeAction | SetStockControlIntervalAction | SetPaddockFilterStateAction;
 
-export const actions = {
+export const uiActions = {
     setDataEditorDatatype,
     setStockControlInterval,
 }

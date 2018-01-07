@@ -59,4 +59,4 @@ interface DatedPaddockFeedValuesProps extends BaseIdObjectProps {
 //     readonly isValid = (): boolean => { return true; }
 // }
 
-export type AllClasses = Paddock; //| DatedPaddockFeedValues;
+export type PaddockClasses = Paddock; //| DatedPaddockFeedValues;

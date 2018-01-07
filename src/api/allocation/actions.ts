@@ -24,7 +24,7 @@ export const deleteAllocation = createAction(ActionTypes.DeleteAllocation,
     (allocation: Allocation) => { return { type: ActionTypes.DeleteAllocation, allocation } }
 );
 
-export const actions = {
+export const allocationActions = {
     addAllocation,
     modifyAllocation,
     deleteAllocation,

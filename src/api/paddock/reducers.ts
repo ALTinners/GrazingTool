@@ -12,11 +12,9 @@ export type State = Paddock[];
 
 const initialState: State = [];
 
-const paddocks = (state: State = initialState, action: PaddockAction): State => {
+export const paddockReducer = (state: State = initialState, action: PaddockAction): State => {
     switch (action.type) {
         default:
             return state
     }
 }
-
-export const reducer = paddocks;

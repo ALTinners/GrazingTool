@@ -47,7 +47,7 @@ export const deleteAnimalTransaction = createAction(ActionTypes.DeleteAnimalTran
     }
 );
 
-export const actions = {
+export const animalTransactionActions = {
     addAnimalTransaction,
     modifyAnimalTransaction,
     deleteAnimalTransaction,

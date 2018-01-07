@@ -24,7 +24,7 @@ export const deleteMovement = createAction(ActionTypes.DeleteMovement,
     (movement: Movement) => { return { type: ActionTypes.DeleteMovement, movement } }
 );
 
-export const actions = {
+export const movementActions = {
     addMovement,
     modifyMovement,
     deleteMovement,

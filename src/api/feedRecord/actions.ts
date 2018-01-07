@@ -24,7 +24,7 @@ export const deleteFeedRecord = createAction(ActionTypes.DeleteFeedRecord,
     (feedRecord: FeedRecord) => { return { type: ActionTypes.DeleteFeedRecord, feedRecord } }
 );
 
-export const actions = {
+export const feedRecordActions = {
     addFeedRecord,
     modifyFeedRecord,
     deleteFeedRecord,

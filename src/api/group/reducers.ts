@@ -12,7 +12,7 @@ const initialState: State = [
     // new Group("Bulls1")
 ];
 
-const groups = (state: State = initialState, action: GroupActions.GroupAction): State => {
+export const groupReducer = (state: State = initialState, action: GroupActions.GroupAction): State => {
     switch (action.type) {
         case (getType(GroupActions.addGroup)):
             return state.concat([action.group]);
@@ -24,5 +24,3 @@ const groups = (state: State = initialState, action: GroupActions.GroupAction): 
             return state;
     }
 }
-
-export const reducer = groups;

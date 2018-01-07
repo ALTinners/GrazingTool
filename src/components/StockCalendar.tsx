@@ -51,6 +51,7 @@ class StockCalendarInternal extends React.Component<Props, StockCalendarState> {
 }
 
 function mapStateToProps(state: AppState): StockCalendarProps {
+    console.log(state);
     return {
         groups: state.groups
     };

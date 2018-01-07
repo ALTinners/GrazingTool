@@ -30,4 +30,4 @@ export class FeedRecord extends BaseDatedObject({
     }
 }
 
-export type AllClasses = FeedRecord;
+export type FeedRecordClasses = FeedRecord;

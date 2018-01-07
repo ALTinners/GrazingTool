@@ -8,7 +8,7 @@ export type State = FeedRecord[];
 
 const initialState: State = [];
 
-const feedRecords = (state: State = initialState, action: Actions.FeedRecordAction): State => {
+export const feedRecordReducer = (state: State = initialState, action: Actions.FeedRecordAction): State => {
     switch (action.type) {
         case (getType(Actions.addFeedRecord)):
             return state.concat([action.feedRecord]);
@@ -20,5 +20,3 @@ const feedRecords = (state: State = initialState, action: Actions.FeedRecordActi
             return state;
     }
 }
-
-export const reducer = feedRecords;

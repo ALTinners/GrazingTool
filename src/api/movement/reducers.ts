@@ -8,7 +8,7 @@ export type State = Movement[];
 
 const initialState: State = [];
 
-const movements = (state: State = initialState, action: Actions.MovementAction): State => {
+export const movementReducer = (state: State = initialState, action: Actions.MovementAction): State => {
     switch (action.type) {
         case (getType(Actions.addMovement)):
             return state.concat([action.movement]);
@@ -20,5 +20,3 @@ const movements = (state: State = initialState, action: Actions.MovementAction):
             return state;
     }
 }
-
-export const reducer = movements;

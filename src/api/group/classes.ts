@@ -75,4 +75,4 @@ export class GroupDatedValues implements GroupValues {
 //     }
 // }
 
-export type AllClasses = Group | GroupDatedValues;
+export type GroupClasses = Group | GroupDatedValues;

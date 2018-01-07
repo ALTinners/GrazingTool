@@ -32,4 +32,4 @@ export class Movement extends BaseDatedObject({
     }
 }
 
-export type AllClasses = Movement;
+export type MovementClasses = Movement;

@@ -32,4 +32,4 @@ Animal.prototype.isValid = function() {
     return (this.name.length > 0 && this.requirement != NaN && this.value != NaN);
 }
 
-export type AllClasses = Animal;
+export type AnimalClasses = Animal;

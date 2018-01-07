@@ -48,4 +48,4 @@ export interface AnimalTransactionPair {
     transaction: AnimalTransaction;
 }
 
-export type AllClasses = AnimalTransaction;
+export type AnimalTransactionClasses = AnimalTransaction;
