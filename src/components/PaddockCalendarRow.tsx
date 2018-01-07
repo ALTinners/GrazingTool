@@ -41,7 +41,7 @@ class PaddockCalendarRowTooltip extends React.Component<PaddockCalendarRowToolti
             return (
                 <div className="custom-tooltip">
                     <p className="label">{`${this.props.label}`}</p>
-                    <p className="desc">{`Numbers: ${payload.count}`}</p>
+                    <p className="desc">{`Numbers: ${payload.headCount}`}</p>
                     <p className="desc">{`Requirements: ${payload.requirement}`}</p>
                     <p className="desc">{`Value: ${payload.value}`}</p>
                     {this.renderTransactions(transactions)}
@@ -56,9 +56,9 @@ class PaddockCalendarRowTooltip extends React.Component<PaddockCalendarRowToolti
     renderTransactions(transactions: AnimalTransactionPair[]): JSX.Element[] {
         return transactions.map((pair) => {
             if (pair.animal) {
-                return <p key={pair.transaction.id} >{`${pair.transaction.count} ${pair.animal.name}`}</p>
+                return <p key={pair.transaction.id} >{`${pair.transaction.headCount} ${pair.animal.name}`}</p>
             } else {
-                return <p key={pair.transaction.id} >{`${pair.transaction.count} Referenced Animal is not found`}</p>
+                return <p key={pair.transaction.id} >{`${pair.transaction.headCount} Referenced Animal is not found`}</p>
             }
         });
     }

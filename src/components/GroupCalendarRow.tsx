@@ -35,7 +35,7 @@ class GroupCalendarRowTooltip extends React.Component<GroupCalendarRowTooltipPro
             return (
                 <div className="custom-tooltip">
                     <p className="label">{`${this.props.label}`}</p>
-                    <p className="desc">{`Numbers: ${payload.count}`}</p>
+                    <p className="desc">{`Numbers: ${payload.headCount}`}</p>
                     <p className="desc">{`Requirements: ${payload.requirement}`}</p>
                     <p className="desc">{`Value: ${payload.value}`}</p>
                     {this.renderTransactions(transactions)}
@@ -50,9 +50,9 @@ class GroupCalendarRowTooltip extends React.Component<GroupCalendarRowTooltipPro
     renderTransactions(transactions: AnimalTransactionPair[]): JSX.Element[] {
         return transactions.map((pair) => {
             if (pair.animal) {
-                return <p key={pair.transaction.id} >{`${pair.transaction.count} ${pair.animal.name}`}</p>
+                return <p key={pair.transaction.id} >{`${pair.transaction.headCount} ${pair.animal.name}`}</p>
             } else {
-                return <p key={pair.transaction.id} >{`${pair.transaction.count} Referenced Animal is not found`}</p>
+                return <p key={pair.transaction.id} >{`${pair.transaction.headCount} Referenced Animal is not found`}</p>
             }
         });
     }
@@ -100,7 +100,7 @@ export class GroupCalendarRow extends React.Component<Props, {}> {
                                     activeDot={{ r: 0 }}
                                     isAnimationActive={true}
                                 />
-                                <XAxis dataKey="date" />
+                                <XAxis dataKey="dateString" />
                                 <YAxis domain={[0, 100]} />
                                 <CartesianGrid strokeDasharray="3 3" />
                                 <Tooltip content={<GroupCalendarRowTooltip />} />

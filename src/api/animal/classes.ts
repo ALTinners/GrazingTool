@@ -1,6 +1,6 @@
 import * as Luxon from "luxon";
 
-import { BaseIdObject, IdType } from "../common";
+import { BaseIdObject, IdType, BaseIdObjectProps } from "../common";
 import { AnimalTransaction } from "../animalTransaction";
 
 export enum Datatypes {
@@ -8,50 +8,28 @@ export enum Datatypes {
     AnimalCount = "ANIMAL_COUNT"
 }
 
-export class Animal extends BaseIdObject {
+export interface AnimalProps extends BaseIdObjectProps {
+    name: string,
+    requirement: number,
+    value: number,
+}
+
+export class Animal extends BaseIdObject({
+    type: Datatypes.Animal,
+    requirement: 0,
+    value: 0,
+}) {
     requirement: number;
     value: number;
+    isValid: () => boolean;
 
-    constructor(name: string, requirement: number, value: number, id?: IdType) {
-        super(Datatypes.Animal, name, id);
-        this.requirement = requirement;
-        this.value = value;
-    }
-
-    readonly isValid = (): boolean => {
-        return (this.name.length > 0 && this.requirement != NaN && this.value != NaN);
-    }
-
-    setName = (name: string) : Animal => {
-        return new Animal(name, this.requirement, this.value, this.id);
-    }
-
-    setRequirement = (requirement: number) : Animal => {
-        return new Animal(this.name, requirement, this.value, this.id);
-    }
-
-    setValue = (value: number) : Animal => {
-        return new Animal(this.name, this.requirement, value, this.id);
+    constructor(props: AnimalProps) {
+        super(props);
     }
 }
 
-export class AnimalCount extends BaseIdObject {
-    animal: Animal;
-    count: number;
-
-    constructor(animal: Animal) {
-        super(Datatypes.AnimalCount);
-        this.animal = animal;
-        this.count = 0;
-    }
-
-    applyTransaction(transaction: AnimalTransaction) {
-        this.count += transaction.count;
-    }
-
-    readonly isValid = (): boolean => {
-        return true;
-    }
+Animal.prototype.isValid = function() {
+    return (this.name.length > 0 && this.requirement != NaN && this.value != NaN);
 }
 
-export type AllClasses = Animal | AnimalCount;
+export type AllClasses = Animal;

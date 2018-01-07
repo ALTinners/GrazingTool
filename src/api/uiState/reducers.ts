@@ -6,14 +6,22 @@ import * as Actions from "./actions";
 import { AllDatatypes } from "../datatypes";
 import { Animal } from "../animal/index";
 
+export interface PaddockFilterState {
+    name: string;
+}
+
 export type State = {
     dataEditorDatatype: AllDatatypes;
     stockControlInterval: Luxon.Interval;
+    paddockFilterState: PaddockFilterState;
 }
 
 const initialState: State = {
     dataEditorDatatype: undefined,
     stockControlInterval: Luxon.Interval.fromDateTimes(Luxon.DateTime.fromJSDate(new Date()), Luxon.DateTime.fromJSDate(new Date()).plus({ days: 90 })),
+    paddockFilterState: {
+        name: ""
+    },
 };
 
 const uiState = (state: State = initialState, action: Actions.AllActions): State => {
@@ -28,6 +36,11 @@ const uiState = (state: State = initialState, action: Actions.AllActions): State
                 ...state,
                 stockControlInterval: action.interval
             }
+        case (getType(Actions.setPaddockFilterState)):
+        return {
+            ...state,
+            paddockFilterState: action.paddockFilterState
+        }
         default:
             return state;
     }

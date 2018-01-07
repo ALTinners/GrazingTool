@@ -6,7 +6,7 @@ import * as Actions from "./actions";
 
 export type State = Animal[];
 
-const initialState: State = [new Animal("Sheep", 3, 2, "SHEEP"), new Animal("Cows", 10, 4), new Animal("Bulls", 6, 4)];
+const initialState: State = [new Animal({name: "Sheep", requirement: 3, value: 2, id: "SHEEP"}), new Animal({name: "Cows", requirement: 10, value: 4}), new Animal({name: "Bulls", requirement: 6, value: 4})];
 
 const animals = (state: State = initialState, action: Actions.AnimalAction): State => {
     switch (action.type) {

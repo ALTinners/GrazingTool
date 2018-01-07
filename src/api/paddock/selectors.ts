@@ -9,13 +9,17 @@ import {
     GroupDatedValues, 
     Paddock,
     Allocation,
-    calculateValuesForInterval 
+    calculateValuesForInterval,
+    getPaddockFilterState,
+    PaddockFilterState
 } from "../"
 
 interface GetPaddockFeedValuesParams {
     paddock: Paddock;
     interval: Luxon.Interval;
 }
+
+export const getPaddocks = (state: AppState) => state.paddocks;
 
 const getAnimals = (state: AppState): Animal[] => state.animals;
 const getPaddock = (state: AppState, params: GetPaddockFeedValuesParams): Paddock => params.paddock;
@@ -30,5 +34,12 @@ export const getPaddockFeedValuesForSpan = createSelector(
     [getAnimals, getPaddock, getAllocations, getInterval],
     (animals: Animal[], paddock: Paddock, allocations: Allocation[], interval: Luxon.Interval): GroupDatedValues[] => {
         return [];
+    }
+)
+
+export const getFilteredPaddocks = createSelector(
+    [getPaddocks, getPaddockFilterState],
+    (paddocks: Paddock[], paddockFilterState: PaddockFilterState) => {
+        return paddocks.filter( (paddock) => paddock.name.includes(paddockFilterState.name) )
     }
 )

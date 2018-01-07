@@ -1,49 +1,46 @@
 import * as Luxon from "luxon";
+import * as uuid from "uuid";
 
-import { BaseDatedObject, IdType } from "../common";
+import { BaseDatedObject, IdType, BaseDatedObjectProps } from "../common";
 import { Animal } from "../animal";
 
 export enum Datatypes {
     AnimalTransaction = "ANIMAL_TRANSACTION",
 }
 
-export class AnimalTransaction extends BaseDatedObject {
+export interface AnimalTransactionProps extends BaseDatedObjectProps {
     animalId: IdType;
     groupId: IdType;
-    count: number;        //The number of animals coming in or out
+    headCount: number;
+    grouping?: number;
+    tags?: string[];
+}
+
+export class AnimalTransaction extends BaseDatedObject({
+    type: Datatypes.AnimalTransaction,
+    animalId: "",
+    groupId: "",
+    headCount: 0,
+    grouping: undefined,
+    tags: undefined,
+}) {
+    animalId: IdType;
+    groupId: IdType;
+    headCount: number;        //The number of animals coming in or out
     grouping: number | undefined;          //A grouping for making a number of Transactions linked
     tags: string[] | undefined;
 
-    constructor(animalId: IdType, groupId: IdType, quantity: number, date: Luxon.DateTime,
-        grouping?: number, tags?: string[], id?: IdType) {
-        super(Datatypes.AnimalTransaction, date, undefined, id);
-        this.animalId = animalId;
-        this.groupId = groupId;
-        this.count = quantity;
-        this.grouping = grouping;
-        this.tags = tags;
-    }
+    isValid: () => boolean;
 
-    setAnimalId = (id: IdType): AnimalTransaction => {
-        return this.set("animalId", id);
+    constructor(props: AnimalTransactionProps) {
+        super({
+            ...props
+        });
     }
+}
 
-    setGroupId = (id: IdType): AnimalTransaction => {
-        return this.set("groupId", id);
-    }
-
-    setCount = (count: number): AnimalTransaction => {
-        console.log(this);
-        return this.set("count", count);
-    }
-
-    setDate = (date: Luxon.DateTime): AnimalTransaction => {
-        return this.set("date", date);
-    }
-
-    isValid = (): boolean => {
-        return (this.date.isValid);
-    }
+AnimalTransaction.prototype.isValid = function() {
+    return (this.headCount != NaN);
 }
 
 export interface AnimalTransactionPair {

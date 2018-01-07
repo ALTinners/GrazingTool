@@ -1,18 +1,28 @@
 import * as Luxon from "luxon";
 
-import { BaseDatedObject, IdType } from "../common";
+import { BaseDatedObject, BaseDatedObjectProps, IdType } from "../common";
 
 export enum Datatypes {
     FeedRecord = "FEED_RECORD"
 }
 
-export class FeedRecord extends BaseDatedObject {
+export interface FeedRecordProps extends BaseDatedObjectProps {
     paddockIds: IdType[];
     notes: string[];
-    constructor(date: Luxon.DateTime, paddockIds: IdType[], notes: string[]) {
-        super(Datatypes.FeedRecord, date);
-        this.paddockIds = paddockIds;
-        this.notes = notes;
+}
+
+export class FeedRecord extends BaseDatedObject({
+    type: Datatypes.FeedRecord,
+    paddockIds: undefined,
+    notes: undefined
+})  {
+    paddockIds: IdType[];
+    notes: string[];
+    constructor(props: FeedRecordProps) {
+        super({
+            type: Datatypes.FeedRecord, 
+            ...props
+        });
     }
 
     readonly isValid = (): boolean => {

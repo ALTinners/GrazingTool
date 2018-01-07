@@ -47,7 +47,7 @@ export const AnimalTransactionForm: React.SFC<AnimalTransactionFormProps> = (pro
             />
             <input
                 type="number"
-                value={props.transaction.count}
+                value={props.transaction.headCount}
                 onChange={ (e) => props.setQuantity(parseFloat(e.currentTarget.value)) }
             />
             <LuxonDayPicker

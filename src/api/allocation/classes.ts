@@ -6,7 +6,9 @@ export enum Datatypes {
     Allocation = "ALLOCATION"
 }
 
-export class Allocation extends BaseIdObject {
+export class Allocation extends BaseIdObject({
+
+}) {
     startDate: Luxon.DateTime;
     endDate: Luxon.DateTime;
     paddocks: IdType[];

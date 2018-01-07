@@ -4,16 +4,17 @@ import * as ReactSelect from "react-select";
 import {
     BaseIdObject,
     IdType,
-    itemsAsReactSelectData
+    itemsAsReactSelectData,
 } from "../../api"
+import { BaseIdObjectProps } from "../../api/common/index";
 
-interface IdObjectPickerProps<T extends BaseIdObject> {
+interface IdObjectPickerProps<T extends BaseIdObjectProps> {
     objects: T[];
     selectedId: IdType | undefined;
     onSelect: (id: IdType | undefined) => void;
 }
 
-export class IdObjectPicker<T extends BaseIdObject> extends React.Component<IdObjectPickerProps<T>, {}> {
+export class IdObjectPicker<T extends BaseIdObjectProps> extends React.Component<IdObjectPickerProps<T>, {}> {
 
     constructor(props: IdObjectPickerProps<T>) {
         super(props);

@@ -17,7 +17,7 @@ export const calculateValuesForInterval =
     ): GroupDatedValues[] => {
         let values: GroupDatedValues[] = [];
 
-        let dailyValue: GroupValues = { count: 0, requirement: 0, value: 0 };
+        let dailyValue: GroupValues = { headCount: 0, requirement: 0, value: 0 };
 
         let date = interval.start;
         if (transactions.length > 0 && transactions[0].date < date) {
@@ -39,7 +39,13 @@ export const calculateValuesForInterval =
                     return { transaction: transaction, animal: undefined };
                 }
             })
-            values.push(new GroupDatedValues(date, dailyValue.count, dailyValue.requirement, dailyValue.value, filteredTransactionPairs));
+            values.push(new GroupDatedValues({
+                dateString: date.toLocaleString(), 
+                headCount: dailyValue.headCount,
+                requirement: dailyValue.requirement, 
+                value:dailyValue.value, 
+                transactions: filteredTransactionPairs
+            }));
             date = date.plus({ days: 1 });
         }
 
@@ -48,8 +54,8 @@ export const calculateValuesForInterval =
 
 export const applyTransaction = (transaction: AnimalTransaction, animal: Animal, previousValues: GroupValues) => {
     return {
-        count: previousValues.count + transaction.count,
-        requirement: previousValues.requirement + (transaction.count * animal.requirement),
-        value: previousValues.value + (transaction.count * animal.value)
+        headCount: previousValues.headCount + transaction.headCount,
+        requirement: previousValues.requirement + (transaction.headCount * animal.requirement),
+        value: previousValues.value + (transaction.headCount * animal.value)
     }
 } 

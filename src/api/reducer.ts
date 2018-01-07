@@ -23,3 +23,5 @@ export const reducer: Reducer<AppState> = combineReducers<AppState>(
         uiState,
     }
 );
+
+export { PaddockFilterState } from "./uiState";

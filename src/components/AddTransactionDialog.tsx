@@ -104,7 +104,12 @@ class AddTransactionDialogInternal extends React.Component<Props, AddTransaction
 
         let newGroup: Group = this.state.selectedGroup!.clone();
         let selectedAnimal: Animal = this.state.selectedAnimal!.clone();
-        let newTransaction = new AnimalTransaction(selectedAnimal!.id, newGroup!.id, this.state.quantity!, this.state.date!);
+        let newTransaction = new AnimalTransaction({
+            animalId: selectedAnimal!.id, 
+            groupId: newGroup!.id, 
+            headCount: this.state.quantity!, 
+            date: this.state.date!
+        });
         // return newGroup.addTransaction(newTransaction);
     }
 
@@ -114,12 +119,12 @@ class AddTransactionDialogInternal extends React.Component<Props, AddTransaction
         }
 
         this.props.addTransaction(
-            new AnimalTransaction(
-                this.state.selectedAnimal!.id,
-                this.state.selectedGroup!.id,
-                this.state.quantity!,
-                this.state.date!
-            )
+            new AnimalTransaction({
+                animalId: this.state.selectedAnimal!.id,
+                groupId: this.state.selectedGroup!.id,
+                headCount: this.state.quantity!,
+                date: this.state.date!
+            })
         );
 
         this.props.exitDialog();

@@ -7,7 +7,7 @@ import * as GroupActions from "./actions";
 export type State = Group[];
 
 const initialState: State = [
-    new Group("Sheep1", "SHEEP1"),
+    new Group({name: "Sheep1", id: "SHEEP1"}),
     // new Group("Cows1"),
     // new Group("Bulls1")
 ];

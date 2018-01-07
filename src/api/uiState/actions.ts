@@ -3,10 +3,12 @@ import * as Luxon from "luxon";
 
 import { AllDatatypes } from "../datatypes";
 import { datatypes } from "../index";
+import { PaddockFilterState } from "./reducers";
 
 enum ActionTypes {
     SetDataEditorDatatype = "SET_DATA_EDITOR_DATATYPE",
     SetStockControlInterval = "SET_STOCK_CONTROL_INTERVAL",
+    SetPaddockFilterState = "SET_PADDOCK_FILTER_STATE",
 }
 
 export interface SetDataEditorDatatypeAction {
@@ -27,7 +29,16 @@ export const setStockControlInterval = createAction(ActionTypes.SetStockControlI
     (interval: Luxon.Interval) => { return { type: ActionTypes.SetStockControlInterval, interval } }
 );
 
-export type AllActions = SetDataEditorDatatypeAction | SetStockControlIntervalAction;
+export interface SetPaddockFilterStateAction {
+    readonly type: ActionTypes.SetPaddockFilterState,
+    readonly paddockFilterState: PaddockFilterState;
+}
+
+export const setPaddockFilterState = createAction(ActionTypes.SetPaddockFilterState,
+    (paddockFilterState: PaddockFilterState) => { return { type: ActionTypes.SetPaddockFilterState, paddockFilterState } }
+);
+
+export type AllActions = SetDataEditorDatatypeAction | SetStockControlIntervalAction | SetPaddockFilterStateAction;
 
 export const actions = {
     setDataEditorDatatype,

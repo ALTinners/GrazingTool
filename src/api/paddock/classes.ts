@@ -1,6 +1,6 @@
 import * as Luxon from "luxon";
 
-import { BaseIdObject } from "../common";
+import { BaseIdObject, BaseIdObjectProps } from "../common";
 
 export enum Datatypes {
     Paddock = "PADDOCK",
@@ -12,13 +12,23 @@ export interface GrowthRateType {
     date: Luxon.DateTime;   
 };
 
-export class Paddock extends BaseIdObject {
+export interface PaddockProps extends BaseIdObjectProps {
     name: string;
     growthRates: GrowthRateType[];
-    constructor(name: string, growthRate: GrowthRateType[]) {
-        super(Datatypes.Paddock);
-        this.name = name;
-        this.growthRates = growthRate;
+}
+
+export class Paddock extends BaseIdObject({
+    type: Datatypes.Paddock,
+    growthRates: undefined
+})  {
+    name: string;
+    growthRates: GrowthRateType[];
+
+    constructor(props: PaddockProps) {
+        super({
+            type: Datatypes.Paddock,
+            ...props
+        });
     }
 
     readonly isValid = (): boolean => {
@@ -30,23 +40,23 @@ export class Paddock extends BaseIdObject {
     }
 }
 
-interface PaddockFeedValues {
-    readonly feedValue: number;
-}
-
-export class DatedPaddockFeedValues extends BaseIdObject implements PaddockFeedValues {
-    date: string;
+interface DatedPaddockFeedValuesProps extends BaseIdObjectProps {
+    dateString: string;
     feedValue: number;
-
-    constructor(
-        date: Luxon.DateTime,
-        feedValue: number) {
-        super(Datatypes.PaddockFeedValues);
-        this.date = date.toLocaleString();
-        this.feedValue = feedValue;
-    }
-
-    readonly isValid = (): boolean => { return true; }
 }
 
-export type AllClasses = Paddock | DatedPaddockFeedValues;
+// export class DatedPaddockFeedValues extends BaseIdObject {
+//     dateString: string;
+//     feedValue: number;
+
+//     constructor(props: DatedPaddockFeedValuesProps) {
+//         super({
+//             type: Datatypes.PaddockFeedValues,
+//             ...props
+//         })
+//     }
+
+//     readonly isValid = (): boolean => { return true; }
+// }
+
+export type AllClasses = Paddock; //| DatedPaddockFeedValues;

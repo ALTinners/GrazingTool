@@ -28,17 +28,17 @@ export class AnimalCardInternal extends React.Component<Props, AnimalCardState> 
     }
 
     setName = (e: React.ChangeEvent<HTMLInputElement>) => {
-        this.updateStateAnimal(this.state.animal.setName(e.currentTarget.value));
+        this.updateStateAnimal(this.state.animal.set("name", e.currentTarget.value));
     }
 
     setRequirement = (e: React.ChangeEvent<HTMLInputElement>) => {
         let number: number = parseFloat(e.currentTarget.value);
-        this.updateStateAnimal(this.state.animal.setRequirement(number));
+        this.updateStateAnimal(this.state.animal.set("requirement", number));
     }
 
     setValue = (e: React.ChangeEvent<HTMLInputElement>) => {
         let number: number = parseFloat(e.currentTarget.value);
-        this.updateStateAnimal(this.state.animal.setValue(number));
+        this.updateStateAnimal(this.state.animal.set("value", number));
     }
 
     updateStateAnimal = (animal: Animal) => {

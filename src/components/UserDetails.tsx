@@ -17,16 +17,16 @@ export default class UserDetails extends React.Component<UserDetailsProps, {}> {
     }
 
     testImmut = () => {
-        let i: MyDevImmut = new MyDevImmut({desc:"hello", id: "joe", balls:"Ilovey", date: Luxon.DateTime.fromJSDate(new Date), firstName: "redmayne", lastName: "gyppy"})
-        console.log(i);
-        console.log(i.fullName());
-        let j: MyDevImmut = i.setDesc("trannies in finland!") as MyDevImmut;
-        console.log(i.desc);
-        console.log(j.desc);
-        console.log(j instanceof MyDevImmut);
-        console.log(i.date);
-        console.log(i.setDate(Luxon.DateTime.fromJSDate(new Date)).date)
-        console.log( (i.change<MyDevImmut>("firstName", "NO PAENUS") as MyDevImmut).fullName() );
+        // let i: MyDevImmut = new MyDevImmut({desc:"hello", id: "joe", balls:"Ilovey", date: Luxon.DateTime.fromJSDate(new Date), firstName: "redmayne", lastName: "gyppy"})
+        // console.log(i);
+        // console.log(i.fullName());
+        // let j: MyDevImmut = i.setDesc("trannies in finland!") as MyDevImmut;
+        // console.log(i.desc);
+        // console.log(j.desc);
+        // console.log(j instanceof MyDevImmut);
+        // console.log(i.date);
+        // console.log(i.setDate(Luxon.DateTime.fromJSDate(new Date)).date)
+        // console.log( (i.change<MyDevImmut>("firstName", "NO PAENUS") as MyDevImmut).fullName() );
     }
 
     render(): JSX.Element {

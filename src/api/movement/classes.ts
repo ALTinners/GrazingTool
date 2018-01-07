@@ -1,18 +1,30 @@
 import * as Luxon from "luxon";
 
-import { BaseIdObject, IdType, BaseDatedObject } from "../common";
+import { BaseIdObject, IdType, BaseDatedObject, BaseDatedObjectProps } from "../common";
 
 export enum Datatypes {
     Movement = "MOVEMENT"
 }
 
-export class Movement extends BaseDatedObject {
+export interface MovementProps extends BaseDatedObjectProps {
     paddock: IdType;
     groups: IdType[];
-    constructor(date: Luxon.DateTime, paddock: IdType, groups: IdType[]) {
-        super(Datatypes.Movement, date);
-        this.paddock = paddock;
-        this.groups = groups;
+}
+
+export class Movement extends BaseDatedObject({
+    type: Datatypes.Movement,
+    paddock: undefined,
+    groups: undefined
+}) {
+
+    paddock: IdType;
+    groups: IdType[];
+
+    constructor(props: MovementProps) {
+        super({
+            type: Datatypes.Movement,
+            ...props
+        });
     }
 
     readonly isValid = (): boolean => {

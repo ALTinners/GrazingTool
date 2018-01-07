@@ -37,26 +37,26 @@ export class AnimalTransactionCardInternal extends React.Component<Props, Animal
     }
 
     setAnimalId = (id: IdType) => {
-        this.updateStateAnimalTransaction(this.state.animalTransaction.setAnimalId(id), true);
+        this.updateStateAnimalTransaction(this.state.animalTransaction.set("animalId", id));
     }
 
     setGroupId = (id: IdType) => {
-        this.updateStateAnimalTransaction(this.state.animalTransaction.setGroupId(id), true);
+        this.updateStateAnimalTransaction(this.state.animalTransaction.set("groupId", id));
     }
 
     setCount = (number: number) => {
-        this.updateStateAnimalTransaction(this.state.animalTransaction.setCount(number), true);
+        this.updateStateAnimalTransaction(this.state.animalTransaction.set("headCount", number));
     }
 
     setDate = (date: Luxon.DateTime) => {
-        this.updateStateAnimalTransaction(this.state.animalTransaction.setDate(date), true);
+        this.updateStateAnimalTransaction(this.state.animalTransaction.set("date", date));
     }
 
     updateStateAnimalTransaction = (animalTransaction: AnimalTransaction, updateValidity: boolean = false) => {
         this.setState(
-            { animalTransaction }, 
-            () => { 
-                if (updateValidity) { 
+            { animalTransaction },
+            () => {
+                if (updateValidity) {
                     // this.props.setValid(this.state.animalTransaction.isValid()) 
                 }
             }
@@ -71,16 +71,33 @@ export class AnimalTransactionCardInternal extends React.Component<Props, Animal
 
     render(): JSX.Element {
         return (
-            <AnimalTransactionForm
-                animals={this.props.animals}
-                groups={this.props.groups}
-                transaction={this.state.animalTransaction}
-                setAnimalId={this.setAnimalId}
-                setGroupId={this.setGroupId}
-                setQuantity={this.setCount}
-                setDate={this.setDate}
-            />
+            <div>
+                <AnimalTransactionForm
+                    animals={this.props.animals}
+                    groups={this.props.groups}
+                    transaction={this.state.animalTransaction}
+                    setAnimalId={this.setAnimalId}
+                    setGroupId={this.setGroupId}
+                    setQuantity={this.setCount}
+                    setDate={this.setDate}
+                />
+                {this.renderOkButton()}
+            </div>
         );
+    }
+
+    renderOkButton(): JSX.Element | null {
+        if (this.state.animalTransaction &&
+            this.state.animalTransaction.isValid() &&
+            !this.state.animalTransaction.equals(this.props.animalTransaction)) {
+            return (
+                <button onClick={this.setAnimalTransaction}>
+                    OK
+                </button>
+            );
+        } else {
+            return null;
+        }
     }
 }
 

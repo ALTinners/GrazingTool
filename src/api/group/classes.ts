@@ -1,7 +1,7 @@
 import * as Luxon from "luxon";
 
-import { BaseIdObject, IdType } from "../common";
-import { Animal, AnimalCount, } from "../animal";
+import { BaseIdObject, IdType, BaseIdObjectProps, BaseDatedObject } from "../common";
+import { Animal, } from "../animal";
 import { AnimalTransaction, AnimalTransactionPair } from "../animalTransaction";
 import { inherits } from "util";
 
@@ -10,42 +10,69 @@ export enum Datatypes {
     GroupValues = "GROUP_VALUES",
 }
 
-export class Group extends BaseIdObject {
-    constructor(name: string, id?: IdType) {
-        super(Datatypes.Group, name, id);
+export interface GroupProps extends BaseIdObjectProps {
+
+}
+
+export class Group extends BaseIdObject({
+    type: Datatypes.Group,
+})   {
+    constructor(props: GroupProps) {
+        super({
+            type: Datatypes.Group,
+            ...props
+        });
     }
 }
 
 export interface GroupValues {
-    readonly count: number;
+    readonly headCount: number;
     readonly requirement: number;
     readonly value: number;
 }
 
-export class GroupDatedValues extends BaseIdObject implements GroupValues {
-    date: string;
-    count: number;
+export interface GroupDatedValuesProps extends BaseIdObjectProps {
+    dateString: string;
+    headCount: number;
+    requirement: number;
+    value: number;
+    transactions: AnimalTransactionPair[];
+}
+
+export class GroupDatedValues implements GroupValues {
+    dateString: string;
+    headCount: number;
     requirement: number;
     value: number;
     transactions: AnimalTransactionPair[];
 
-    constructor(
-        date: Luxon.DateTime,
-        count: number,
-        requirement: number,
-        value: number,
-        transactions: AnimalTransactionPair[]) {
-        super(Datatypes.GroupValues);
-        this.date = date.toLocaleString();
-        this.count = count;
-        this.requirement = requirement;
-        this.value = value;
-        this.transactions = transactions;
+    constructor(props: GroupDatedValuesProps) {
+        this.dateString = props.dateString
+        this.headCount = props.headCount
+        this.requirement = props.requirement
+        this.value = props.value
+        this.transactions = props.transactions
     }
 
-    readonly isValid = (): boolean => {
-        return true;
-    }
 }
+
+// export class GroupDatedValues extends BaseIdObject implements GroupValues {
+//     dateString: string;
+//     headCount: number;
+//     requirement: number;
+//     value: number;
+//     transactions: AnimalTransactionPair[];
+
+//     constructor(props: GroupDatedValuesProps) {
+//         super({
+//             type: Datatypes.GroupValues,
+//             ...props
+//         });
+//     }
+
+//     readonly isValid = (): boolean => {
+//         return true;
+//     }
+// }
 
 export type AllClasses = Group | GroupDatedValues;
