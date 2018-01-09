@@ -18,7 +18,7 @@ export const addGroup = createAction(ActionTypes.AddGroup,
         return (
             {
                 type: ActionTypes.AddGroup,
-                group: group,
+                group,
             }
         )
     }
@@ -29,7 +29,7 @@ export const modifyGroup = createAction(ActionTypes.ModifyGroup,
         return (
             {
                 type: ActionTypes.ModifyGroup,
-                group: group,
+                group,
             }
         )
     }
@@ -40,7 +40,7 @@ export const deleteGroup = createAction(ActionTypes.DeleteGroup,
         return (
             {
                 type: ActionTypes.DeleteGroup,
-                group: group,
+                group,
             }
         )
     }

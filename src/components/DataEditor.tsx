@@ -5,12 +5,14 @@ import { connect } from "react-redux";
 import {
     AppState,
     Animal,
+    AnimalTransaction,
     Group,
     Paddock,
     actions,
     AllDatatypes,
     datatypes,
     displayableDatatypes,
+    PaddockFilterState,
 } from "../api";
 
 import {
@@ -19,9 +21,10 @@ import {
     AnimalTransactionCard
 } from "./dataCards";
 import { DataEditorDatatypeCard } from "./DataEditorDatatypeCard";
-import "./App.scss";
 import { AnimalTransactionCardInternal } from "./dataCards/AnimalTransactionCard";
-import { AnimalTransaction } from "../api/animalTransaction/index";
+import { PaddockDataFilter } from "./dataFilters/PaddockDataFilter"
+
+import "./App.scss";
 
 interface DataEditorProps {
 
@@ -33,16 +36,18 @@ interface ReduxStateProps {
     paddocks: Paddock[];
     transactions: AnimalTransaction[];
     selectedDatatype: AllDatatypes;
+    paddockFilterState: PaddockFilterState;
 }
 
 interface ReduxDispatchProps {
     setDatatype: (data: AllDatatypes) => void;
     setAnimal: (data: Animal) => void;
     setAnimalTransaction: (data: AnimalTransaction) => void;
+    setGroup: (data: Group) => void;
+    setPaddockFilterState: (data: PaddockFilterState) => void;
 }
 
 type Props = DataEditorProps & ReduxStateProps & ReduxDispatchProps;
-
 
 class DataEditorInternal extends React.Component<Props, {}> {
     constructor(props: Props) {
@@ -61,11 +66,26 @@ class DataEditorInternal extends React.Component<Props, {}> {
                 </div>
                 <div className="column-list-container">
                     <div className="column-list">
+                        {this.renderFilter()}
                         {this.renderSelectedDatatypes()}
                     </div>
                 </div>
             </div>
         );
+    }
+
+    renderFilter = (): JSX.Element | null => {
+        switch (this.props.selectedDatatype) {
+            case (datatypes.PaddockDatatypes.Paddock): return (
+                    <PaddockDataFilter
+                        filter={this.props.paddockFilterState}
+                        setFilter={this.props.setPaddockFilterState}
+                    />
+                );
+            default: return (
+                null
+            );
+        }
     }
 
     renderDisplayableDatatypes = (): JSX.Element[] => {
@@ -115,6 +135,7 @@ class DataEditorInternal extends React.Component<Props, {}> {
                     <GroupCard
                         key={group.name}
                         group={group}
+                        setGroup={this.props.setGroup}
                     />
                 )
             });
@@ -141,8 +162,9 @@ const mapStateToProps = (state: AppState): ReduxStateProps => {
         animals: state.animals,
         groups: state.groups,
         paddocks: state.paddocks,
-        transactions: state.transactions,
-        selectedDatatype: state.uiState.dataEditorDatatype
+        transactions: state.animalTransactions,
+        selectedDatatype: state.uiState.dataEditorDatatype,
+        paddockFilterState: state.uiState.paddockFilterState,
     };
 }
 
@@ -157,6 +179,12 @@ const mapDispatchToProps = (dispatch: Redux.Dispatch<AppState>): ReduxDispatchPr
         setAnimalTransaction: (transaction: AnimalTransaction) => {
             dispatch(actions.animalTransactionActions.modifyAnimalTransaction(transaction))
         },
+        setGroup: (group: Group) => {
+            dispatch(actions.groupActions.modifyGroup(group))
+        },
+        setPaddockFilterState: (filter: PaddockFilterState) => {
+            dispatch(actions.uiActions.setPaddockFilterState(filter))
+        }
     };
 }
 

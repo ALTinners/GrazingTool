@@ -17,7 +17,7 @@ export interface GetTransactionsOptions extends DateFilterOptions {
 }
 
 export const getTransactions = (state: AppState, options?: GetTransactionsOptions): AnimalTransaction[] => {
-    let transactions = state.transactions;
+    let transactions = state.animalTransactions;
     if (options) {
         if (options.animalId) {
             transactions = filterForId(transactions, "animalId", options.animalId);
@@ -32,4 +32,4 @@ export const getTransactions = (state: AppState, options?: GetTransactionsOption
 
     return sortByDate(transactions);
 }
-export const getTransactionForId = (state: AppState, id: IdType): AnimalTransaction | undefined => state.transactions.find((transaction: AnimalTransaction) => transaction.id === id); 
+export const getTransactionForId = (state: AppState, id: IdType): AnimalTransaction | undefined => state.animalTransactions.find((transaction: AnimalTransaction) => transaction.id === id); 

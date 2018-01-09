@@ -10,7 +10,7 @@ interface PaddockDataFilterProps {
     setFilter: (filter: PaddockFilterState) => void;
 }
 
-class PaddockDataFilter extends React.Component<PaddockDataFilterProps, {}> {
+export class PaddockDataFilter extends React.Component<PaddockDataFilterProps, {}> {
 
     constructor(props: PaddockDataFilterProps) {
         super(props);
@@ -20,6 +20,7 @@ class PaddockDataFilter extends React.Component<PaddockDataFilterProps, {}> {
     render(): JSX.Element | null {
         return (
             <div className="filter-bar">
+                <span>Name</span>
                 <input
                     type="text"
                     value={this.props.filter.name}

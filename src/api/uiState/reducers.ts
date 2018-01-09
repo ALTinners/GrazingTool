@@ -6,19 +6,54 @@ import * as Actions from "./actions";
 import { AllDatatypes } from "../datatypes";
 import { Animal } from "../animal/index";
 
-export interface PaddockFilterState {
+export interface BaseFilterState {
     name: string;
+}
+
+export interface DatedFilterState extends BaseFilterState {
+    lowerDate: Luxon.DateTime | undefined;
+    upperDate: Luxon.DateTime | undefined;
+}
+
+export interface AnimalFilterState extends BaseFilterState  {
+
+}
+
+export interface AnimalTransactionFilterState extends DatedFilterState  {
+
+}
+
+export interface GroupFilterState extends BaseFilterState  {
+
+}
+
+export interface PaddockFilterState extends BaseFilterState {
+
 }
 
 export type State = {
     dataEditorDatatype: AllDatatypes;
     stockControlInterval: Luxon.Interval;
+    animalFilterState: AnimalFilterState;
+    animalTransactionFilterState: AnimalTransactionFilterState;
+    groupFilterState: GroupFilterState;
     paddockFilterState: PaddockFilterState;
 }
 
 const initialState: State = {
     dataEditorDatatype: undefined,
     stockControlInterval: Luxon.Interval.fromDateTimes(Luxon.DateTime.fromJSDate(new Date()), Luxon.DateTime.fromJSDate(new Date()).plus({ days: 90 })),
+    animalFilterState: {
+        name: ""
+    },
+    animalTransactionFilterState: {
+        name: "",
+        lowerDate: undefined,
+        upperDate: undefined
+    },
+    groupFilterState: {
+        name: ""
+    },
     paddockFilterState: {
         name: ""
     },

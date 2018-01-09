@@ -11,7 +11,7 @@ import { State as UiState } from "./uiState"
 
 export interface AppState {
     animals: AnimalState;
-    transactions: TransactionState;
+    animalTransactions: TransactionState;
     groups: GroupState;
     paddocks: PaddockState;
     feedRecords: FeedRecordState;
