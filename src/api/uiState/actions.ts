@@ -9,9 +9,11 @@ import {
     GroupFilterState,
     PaddockFilterState
 } from "./reducers";
+import { IdType } from "../common/index";
 
 enum ActionTypes {
     SetDataEditorDatatype = "SET_DATA_EDITOR_DATATYPE",
+    SetSelectedObjectId = "SET_SELECTED_OBJECT_ID",
     SetStockControlInterval = "SET_STOCK_CONTROL_INTERVAL",
     SetAnimalFilterState = "SET_ANIMAL_FILTER_STATE",
     SetAnimalTransactionFilterState = "SET_ANIMAL_TRANSACTION_FILTER_STATE",
@@ -26,6 +28,15 @@ export interface SetDataEditorDatatypeAction {
 
 export const setDataEditorDatatype = createAction(ActionTypes.SetDataEditorDatatype,
     (datatype: AllDatatypes) => { return { type: ActionTypes.SetDataEditorDatatype, datatype: datatype } }
+);
+
+export interface SetSelectedObjectIdAction {
+    readonly type: ActionTypes.SetSelectedObjectId,
+    readonly id: IdType
+}
+
+export const setSelectedObjectId = createAction(ActionTypes.SetSelectedObjectId,
+    (id: IdType) => { return { type: ActionTypes.SetSelectedObjectId, id } }
 );
 
 export interface SetStockControlIntervalAction {
@@ -75,6 +86,7 @@ export const setPaddockFilterState = createAction(ActionTypes.SetPaddockFilterSt
 
 export type AllActions =
     SetDataEditorDatatypeAction |
+    SetSelectedObjectIdAction |
     SetStockControlIntervalAction |
     SetAnimalFilterStateAction |
     SetAnimalTransactionFilterStateAction |
@@ -84,6 +96,7 @@ export type AllActions =
 
 export const uiActions = {
     setDataEditorDatatype,
+    setSelectedObjectId,
     setStockControlInterval,
     setAnimalFilterState,
     setAnimalTransactionFilterState,

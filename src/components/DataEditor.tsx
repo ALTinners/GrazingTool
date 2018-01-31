@@ -13,6 +13,7 @@ import {
     datatypes,
     displayableDatatypes,
     PaddockFilterState,
+    IdType
 } from "../api";
 
 import {
@@ -41,6 +42,7 @@ interface ReduxStateProps {
 
 interface ReduxDispatchProps {
     setDatatype: (data: AllDatatypes) => void;
+    setSelectedObjectId: (id: IdType) => void;
     setAnimal: (data: Animal) => void;
     setAnimalTransaction: (data: AnimalTransaction) => void;
     setGroup: (data: Group) => void;
@@ -52,7 +54,6 @@ type Props = DataEditorProps & ReduxStateProps & ReduxDispatchProps;
 class DataEditorInternal extends React.Component<Props, {}> {
     constructor(props: Props) {
         super(props);
-
         this.state = {};
     }
 
@@ -121,6 +122,9 @@ class DataEditorInternal extends React.Component<Props, {}> {
                 return (
                     <AnimalCard
                         key={animal.id}
+                        label={animal.name}
+                        id={animal.id}
+                        setSelectedId={ () => this.props.setSelectedObjectId(animal.id) }
                         animal={animal}
                         setAnimal={this.props.setAnimal}
                     />
@@ -134,6 +138,9 @@ class DataEditorInternal extends React.Component<Props, {}> {
                 return (
                     <GroupCard
                         key={group.name}
+                        label={group.name}
+                        id={group.id}
+                        setSelectedId={ () => this.props.setSelectedObjectId(group.id) }
                         group={group}
                         setGroup={this.props.setGroup}
                     />
@@ -147,6 +154,9 @@ class DataEditorInternal extends React.Component<Props, {}> {
                 return (
                     <AnimalTransactionCard
                         key={transaction.id}
+                        label={transaction.name}
+                        id={transaction.id}
+                        setSelectedId={ () => this.props.setSelectedObjectId(transaction.id) }
                         animals={this.props.animals}
                         groups={this.props.groups}
                         animalTransaction={transaction}
@@ -172,6 +182,9 @@ const mapDispatchToProps = (dispatch: Redux.Dispatch<AppState>): ReduxDispatchPr
     return {
         setDatatype: (datatype: AllDatatypes) => {
             dispatch(actions.uiActions.setDataEditorDatatype(datatype));
+        },
+        setSelectedObjectId: (id: IdType) => {
+            dispatch(actions.uiActions.setSelectedObjectId(id));
         },
         setAnimal: (animal: Animal) => {
             dispatch(actions.animalActions.modifyAnimal(animal))

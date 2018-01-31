@@ -3,8 +3,7 @@ import { getType } from "typesafe-actions";
 import * as Luxon from "luxon";
 
 import * as Actions from "./actions";
-import { AllDatatypes } from "../datatypes";
-import { Animal } from "../animal/index";
+import { IdType, AllDatatypes } from "../";
 
 export interface BaseFilterState {
     name: string;
@@ -33,6 +32,7 @@ export interface PaddockFilterState extends BaseFilterState {
 
 export type State = {
     dataEditorDatatype: AllDatatypes;
+    selectedObjectId: IdType | undefined,
     stockControlInterval: Luxon.Interval;
     animalFilterState: AnimalFilterState;
     animalTransactionFilterState: AnimalTransactionFilterState;
@@ -42,6 +42,7 @@ export type State = {
 
 const initialState: State = {
     dataEditorDatatype: undefined,
+    selectedObjectId: undefined,
     stockControlInterval: Luxon.Interval.fromDateTimes(Luxon.DateTime.fromJSDate(new Date()), Luxon.DateTime.fromJSDate(new Date()).plus({ days: 90 })),
     animalFilterState: {
         name: ""
@@ -64,8 +65,14 @@ export const uiStateReducer = (state: State = initialState, action: Actions.AllA
         case (getType(Actions.setDataEditorDatatype)):
             return {
                 ...state,
-                dataEditorDatatype: action.datatype
+                dataEditorDatatype: action.datatype,
+                selectedObjectId: undefined
             }
+        case (getType(Actions.setSelectedObjectId)):
+            return {
+                ...state,
+                selectedObjectId: action.id
+            }            
         case (getType(Actions.setStockControlInterval)):
             return {
                 ...state,
